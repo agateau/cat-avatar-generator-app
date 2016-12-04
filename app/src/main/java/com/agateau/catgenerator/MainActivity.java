@@ -1,18 +1,19 @@
 package com.agateau.catgenerator;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
 
 import com.agateau.utils.log.NLog;
 
 public class MainActivity extends AppCompatActivity {
     private final PartDb mPartDb = new PartDb();
-    private AvatarView mAvatarView;
     private EditText mNameEditText;
+    private ImageView mImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,16 +21,7 @@ public class MainActivity extends AppCompatActivity {
         mPartDb.init(this);
 
         setContentView(R.layout.activity_main);
-        mAvatarView = new AvatarView(mPartDb, this);
-        mAvatarView.setSeed(256);
-
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.rootLayout);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
-        params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-        params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
-        params.addRule(RelativeLayout.ABOVE, R.id.nameTextView);
-        layout.addView(mAvatarView, params);
+        mImageView = (ImageView) findViewById(R.id.imageView);
 
         mNameEditText = (EditText) findViewById(R.id.nameEditText);
         mNameEditText.addTextChangedListener(new TextWatcher() {
@@ -40,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                updateSeed();
+                generateAvatar();
             }
 
             @Override
@@ -48,15 +40,19 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        generateAvatar();
     }
 
-    private void updateSeed() {
+    private void generateAvatar() {
         String name = String.valueOf(mNameEditText.getText());
         long seed = 0;
         for (int idx = 0; idx < name.length(); ++idx) {
             seed += name.codePointAt(idx);
         }
         NLog.i("name=%s seed=%d", name, seed);
-        mAvatarView.setSeed(seed);
+        int size = 1024;
+        Bitmap bitmap = AvatarGenerator.generate(this, mPartDb, seed, size);
+        mImageView.setImageBitmap(bitmap);
     }
 }
