@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+cd $(dirname $0)/..
+
+RES_DIR=app/src/main/res
+
+SRC_FILE=icons/ic_launcher.png
+
+NAME=ic_launcher.png
+
+while read size dir ; do
+    echo
+    echo "# $size => $dir"
+    echo
+    mkdir -p $dir
+    convert -resize "${size}x${size}" $SRC_FILE $dir/$NAME
+done <<EOF
+ 48 $RES_DIR/mipmap-mdpi
+ 72 $RES_DIR/mipmap-hdpi
+ 96 $RES_DIR/mipmap-xhdpi
+144 $RES_DIR/mipmap-xxhdpi
+512 gplay
+EOF
