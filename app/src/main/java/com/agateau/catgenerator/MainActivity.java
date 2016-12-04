@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void generateAvatar() {
-        String name = String.valueOf(mNameEditText.getText()).trim();
+        String name = String.valueOf(mNameEditText.getText()).trim().toLowerCase();
         long seed = 0;
         for (int idx = 0; idx < name.length(); ++idx) {
             seed += name.codePointAt(idx);
