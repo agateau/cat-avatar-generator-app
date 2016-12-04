@@ -10,13 +10,10 @@
 
     <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:id="@+id/nameEditText" android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" android:layout_alignParentStart="true" />
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium" android:text="Cat name"
-        android:id="@+id/nameTextView" android:layout_above="@+id/nameEditText"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentEnd="true" android:layout_alignParentStart="true"
+        android:singleLine="true" android:hint="Cat name" />
     <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:id="@+id/imageView" android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" android:layout_alignEnd="@+id/nameEditText"
-        android:layout_above="@+id/nameTextView" />
+        android:id="@+id/imageView" android:layout_alignParentStart="true" android:layout_alignEnd="@+id/nameEditText"
+        android:layout_above="@+id/nameEditText" android:layout_alignParentEnd="false"
+        android:layout_alignParentLeft="false" android:scaleType="fitEnd" />
 </RelativeLayout>
