@@ -6,8 +6,12 @@ import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.agateau.utils.log.NLog;
+
 public class MainActivity extends AppCompatActivity {
     private LinearLayout mLinearLayout;
+
+    private final PartDb mPartDb = new PartDb();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,9 +21,12 @@ public class MainActivity extends AppCompatActivity {
         // Create a LinearLayout in which to add the ImageView
         mLinearLayout = new LinearLayout(this);
 
+        mPartDb.init(this);
+
         // Instantiate an ImageView and define its properties
         ImageView view = new ImageView(this);
-        view.setImageResource(R.drawable.body_1);
+        int id = mPartDb.getPart(PartDb.PART_NAMES[0], 1);
+        view.setImageResource(id);
         view.setAdjustViewBounds(true); // set the ImageView bounds to match the Drawable's dimensions
         view.setLayoutParams(new Gallery.LayoutParams(Gallery.LayoutParams.WRAP_CONTENT,
                 Gallery.LayoutParams.WRAP_CONTENT));
