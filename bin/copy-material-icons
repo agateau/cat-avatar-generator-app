@@ -1,0 +1,81 @@
+#!/bin/sh
+set -e
+
+PROGNAME=$(basename $0)
+
+oldpwd=$PWD
+cd $(dirname $0)
+RES_DIR=$PWD/../app/src/main/res
+cd $oldpwd
+
+REF_SIZE=xxhdpi
+DST_SIZES="hdpi xhdpi xxxhdpi"
+
+die() {
+    echo "$PROGNAME: $*" >&2
+    exit 1
+}
+
+usage() {
+    if [ "$*" != "" ] ; then
+        echo "Error: $*"
+    fi
+
+    cat << EOF
+Usage: $PROGNAME [OPTION ...] <path/to/material-icons/repo>
+
+Loop on all icons ("ic_*.png") files in $REF_SIZE, find icons for the other
+sizes in the material-icons repo and copies them at the right place.
+
+Options:
+  -h, --help          display this usage message and exit
+EOF
+
+    exit 1
+}
+
+material_repo=""
+while [ $# -gt 0 ] ; do
+    case "$1" in
+    -h|--help)
+        usage
+        ;;
+    -*)
+        usage "Unknown option '$1'"
+        ;;
+    *)
+        if [ -z "$material_repo" ] ; then
+            material_repo="$1"
+        else
+            usage "Too many arguments"
+        fi
+        ;;
+    esac
+    shift
+done
+
+if [ -z "$material_repo" ] ; then
+    usage "Not enough arguments"
+fi
+
+for ref_path in $RES_DIR/drawable-$REF_SIZE/ic_*.png ; do
+    icon_name=$(basename $ref_path)
+    echo $icon_name
+    find $material_repo -name $icon_name | while read src_path ; do
+        case "$src_path" in
+        */drawable-*dpi/*)
+            # size_name = drawable-*dpi
+            size_name=$(basename $(dirname $src_path))
+            echo "- $size_name"
+
+            dst_dir=$RES_DIR/$size_name
+            mkdir -p $dst_dir
+            cp $src_path $dst_dir/
+            ;;
+        *)
+            ;;
+        esac
+    done
+done
+
+# vim:set ts=4 sw=4 et:
