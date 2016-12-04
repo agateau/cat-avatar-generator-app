@@ -1,6 +1,5 @@
 package com.agateau.catgenerator;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -14,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     private final PartDb mPartDb = new PartDb();
     private EditText mNameEditText;
     private ImageView mImageView;
+    private AvatarGenerator mAvatarGenerator = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +45,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void generateAvatar() {
-        String name = String.valueOf(mNameEditText.getText());
+        String name = String.valueOf(mNameEditText.getText()).trim();
         long seed = 0;
         for (int idx = 0; idx < name.length(); ++idx) {
             seed += name.codePointAt(idx);
         }
         NLog.i("name=%s seed=%d", name, seed);
         int size = 1024;
-        Bitmap bitmap = AvatarGenerator.generate(this, mPartDb, seed, size);
-        mImageView.setImageBitmap(bitmap);
+        if (mAvatarGenerator != null) {
+            mAvatarGenerator.cancel(true);
+        }
+        mAvatarGenerator = new AvatarGenerator(this, mPartDb, mImageView, size);
+        mAvatarGenerator.execute(seed);
     }
 }
