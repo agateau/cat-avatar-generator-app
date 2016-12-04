@@ -39,7 +39,7 @@ public class AvatarGenerator extends AsyncTask<Long, Void, Bitmap> {
         Bitmap bitmap = Bitmap.createBitmap(mSize, mSize, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
 
-        canvas.drawColor(Color.WHITE);
+        canvas.drawColor(Color.TRANSPARENT);
         for (String partName : PartDb.PART_NAMES) {
             if (isCancelled()) {
                 NLog.i("Cancelled seed=%d", seed);
