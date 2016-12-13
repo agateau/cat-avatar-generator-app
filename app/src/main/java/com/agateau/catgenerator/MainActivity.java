@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
     private final PartDb mPartDb = new PartDb();
@@ -27,10 +28,18 @@ public class MainActivity extends AppCompatActivity {
     private ImageView mImageView;
     private AvatarGenerator mAvatarGenerator = null;
 
+    private final String PARTS_JSON = "parts/parts.json";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPartDb.init(this);
+        try {
+            InputStream stream = getAssets().open(PARTS_JSON);
+            mPartDb.init(stream);
+        } catch (IOException e) {
+            NLog.e("Failed to open %s: %s", PARTS_JSON, e);
+            throw new RuntimeException(e);
+        }
 
         setContentView(R.layout.activity_main);
         mImageView = (ImageView) findViewById(R.id.imageView);
