@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Cat Avatar Generator</string>
+    <string name="cat_name_hint">Cat name</string>
 </resources>
