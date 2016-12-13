@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
-    private final PartDb mPartDb = new PartDb();
+    private final AvatarPartDb mAvatarPartDb = new AvatarPartDb();
     private EditText mNameEditText;
     private ImageView mImageView;
     private AvatarGenerator mAvatarGenerator = null;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         try {
             InputStream stream = getAssets().open(PARTS_JSON);
-            mPartDb.init(stream);
+            mAvatarPartDb.init(stream);
         } catch (IOException e) {
             NLog.e("Failed to open %s: %s", PARTS_JSON, e);
             throw new RuntimeException(e);
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         if (mAvatarGenerator != null) {
             mAvatarGenerator.cancel(true);
         }
-        mAvatarGenerator = new AvatarGenerator(this, mPartDb, mImageView, size);
+        mAvatarGenerator = new AvatarGenerator(this, mAvatarPartDb, mImageView, size);
         mAvatarGenerator.execute(seed);
     }
 

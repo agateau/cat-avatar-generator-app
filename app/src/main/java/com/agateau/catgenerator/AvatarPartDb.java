@@ -26,7 +26,7 @@ import java.util.Vector;
  * all files of a same category are grouped together
  *
  */
-public class PartDb {
+public class AvatarPartDb {
     private Map<String, Vector<AvatarPart>> mParts = new HashMap<>();
 
     public static final String[] PART_NAMES = {"body", "fur", "eyes", "mouth", "accessorie"};

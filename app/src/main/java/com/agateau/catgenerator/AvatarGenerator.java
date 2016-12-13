@@ -23,7 +23,7 @@ import java.util.Random;
  */
 public class AvatarGenerator extends AsyncTask<Long, Void, Bitmap> {
     private final Context mContext;
-    private final PartDb mPartDb;
+    private final AvatarPartDb mAvatarPartDb;
     private final int mSize;
     private final WeakReference<ImageView> mImageViewReference;
     private final Random mRandom = new Random();
@@ -31,9 +31,9 @@ public class AvatarGenerator extends AsyncTask<Long, Void, Bitmap> {
     private final int AVATAR_FULL_SIZE = 1024;
     private final String AVATAR_PARTS_DIR = "parts";
 
-    public AvatarGenerator(Context context, PartDb partDb, ImageView imageView, int size) {
+    public AvatarGenerator(Context context, AvatarPartDb avatarPartDb, ImageView imageView, int size) {
         mContext = context;
-        mPartDb = partDb;
+        mAvatarPartDb = avatarPartDb;
         mSize = size;
         mImageViewReference = new WeakReference<>(imageView);
     }
@@ -55,13 +55,13 @@ public class AvatarGenerator extends AsyncTask<Long, Void, Bitmap> {
         Paint paint = new Paint(Paint.FILTER_BITMAP_FLAG);
 
         canvas.drawColor(Color.TRANSPARENT);
-        for (String partName : PartDb.PART_NAMES) {
+        for (String partName : AvatarPartDb.PART_NAMES) {
             if (isCancelled()) {
                 NLog.i("Cancelled seed=%d", seed);
                 return null;
             }
-            int idx = mRandom.nextInt(mPartDb.getPartCount(partName));
-            AvatarPart part = mPartDb.getPart(partName, idx);
+            int idx = mRandom.nextInt(mAvatarPartDb.getPartCount(partName));
+            AvatarPart part = mAvatarPartDb.getPart(partName, idx);
             if (part == null) {
                 continue;
             }
