@@ -24,6 +24,7 @@ import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
     private final AvatarPartDb mAvatarPartDb = new AvatarPartDb();
+    private long mSeed = 0;
     private EditText mNameEditText;
     private ImageView mImageView;
     private AvatarGenerator mAvatarGenerator = null;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                updateSeed();
                 generateAvatar();
             }
 
@@ -74,29 +76,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void generateAvatar() {
-        long seed = computeSeed();
         int size = 1024;
         if (mAvatarGenerator != null) {
             mAvatarGenerator.cancel(true);
         }
         mAvatarGenerator = new AvatarGenerator(this, mAvatarPartDb, mImageView, size);
-        mAvatarGenerator.execute(seed);
+        mAvatarGenerator.execute(mSeed);
     }
 
-    private long computeSeed() {
+    private void updateSeed() {
         String name = String.valueOf(mNameEditText.getText()).trim().toLowerCase();
-        long seed = 0;
+        mSeed = 0;
         for (int idx = 0; idx < name.length(); ++idx) {
-            seed += name.codePointAt(idx);
+            mSeed += name.codePointAt(idx);
         }
-        return seed;
     }
 
     private void shareAvatar() {
-        long seed = computeSeed();
         File avatarDir = new File(getCacheDir(), "avatars");
         avatarDir.mkdirs();
-        File avatarFile = new File(avatarDir, String.valueOf(seed) + ".png");
+        File avatarFile = new File(avatarDir, String.valueOf(mSeed) + ".png");
 
         if (!saveAvatar(avatarFile)) {
             return;
