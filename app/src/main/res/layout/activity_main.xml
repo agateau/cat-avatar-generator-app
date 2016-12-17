@@ -3,20 +3,44 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:id="@+id/rootLayout"
     android:layout_height="match_parent" android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.agateau.catgenerator.MainActivity">
 
-    <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:id="@+id/nameEditText" android:singleLine="true" android:hint="@string/cat_name_hint"
-        android:layout_alignBottom="@+id/shareButton" android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/shareButton" />
-    <ImageView android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:id="@+id/imageView" android:layout_below="@+id/nameEditText"
+    <RelativeLayout
+        android:id="@+id/headerView"
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:background="@color/colorPrimary"
+        android:layout_alignParentTop="true" android:layout_alignParentStart="true"
+        android:baselineAligned="false" android:measureWithLargestChild="false">
+
+        <EditText
+            android:id="@+id/nameEditText"
+            android:singleLine="true"
+            android:hint="@string/cat_name_hint"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_alignBottom="@+id/shareButton"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/shareButton"
+        />
+
+        <ImageButton
+            android:id="@+id/shareButton"
+            style="?android:attr/buttonStyleSmall"
+            android:src="@drawable/ic_share_white_24dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+        />
+
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/headerView"
         android:layout_alignParentStart="true" />
-    <ImageButton style="?android:attr/buttonStyleSmall" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:text="Share" android:id="@+id/shareButton"
-        android:layout_alignParentTop="true" android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_share_white_24dp" />
 </RelativeLayout>
