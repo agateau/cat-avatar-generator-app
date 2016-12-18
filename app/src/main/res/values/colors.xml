@@ -3,8 +3,8 @@
     <color name="colorPrimary">#766d6a</color>
     <color name="colorPrimaryDark">#766d6a</color>
     <color name="colorAccent">#ffab40</color>
-    <color name="wallTop">#decdc8</color>
+    <color name="wallTop">#c4e6e5</color>
     <color name="wallBottom">#ffffff</color>
-    <color name="floorTop">#f1ede8</color>
-    <color name="floorBottom">#766d6a</color>
+    <color name="floorTop">#cb9c4a</color>
+    <color name="floorBottom">#feffc1</color>
 </resources>
