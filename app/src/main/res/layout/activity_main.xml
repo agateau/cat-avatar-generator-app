@@ -33,9 +33,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
+            android:layout_toStartOf="@+id/infoButton"
         />
 
+        <ImageButton
+            android:id="@+id/infoButton"
+            style="?android:attr/buttonStyleSmall"
+            android:src="@drawable/ic_info_white_24dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+        />
     </RelativeLayout>
     <ImageView
         android:id="@+id/imageView"

@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">Cat Avatar Generator</string>
     <string name="cat_name_hint">Cat name</string>
+    <string name="about_author">Aurélien Gâteau</string>
+    <string name="about_description">This app is based on the awesome <a href="{catgen_url}">Cat avatar generator</a> by David Revoy.\n
+
+        \nGive those cute cats some stars on <a href="{gplay_url}">Google Play</a>!\n
+
+        \n
+        License:\n
+        • Code: <a href="{license_url}">Apache 2.0</a>\n
+        • Artwork: CC-By David Revoy for <a href="{peppercarrot_url}">Pepper &amp; Carrot</a> comic\n
+
+        \nYou can fork the project on <a href="{github_url}">GitHub</a>.
+    </string>
 </resources>

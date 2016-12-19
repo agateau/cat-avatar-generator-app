@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        generateAvatar();
+
         ImageButton button = (ImageButton) findViewById(R.id.shareButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +74,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        generateAvatar();
+        button = (ImageButton) findViewById(R.id.infoButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAbout();
+            }
+        });
     }
 
     private void generateAvatar() {
@@ -82,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
         }
         mAvatarGenerator = new AvatarGenerator(this, mAvatarPartDb, mImageView, size);
         mAvatarGenerator.execute(mSeed);
+    }
+
+    private void showAbout() {
+        AboutActivity.start(this);
     }
 
     private void updateSeed() {
