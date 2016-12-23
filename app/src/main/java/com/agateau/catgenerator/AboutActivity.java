@@ -27,7 +27,8 @@ import com.agateau.utils.NTemplate;
 public class AboutActivity extends AppCompatActivity {
     private static final String AUTHOR_EMAIL = "mail@agateau.com";
     private static final String GPLAY_URL = "https://play.google.com/store/apps/details?id=com.agateau.catgenerator";
-    private static final String LICENSE_URL = "http://www.apache.org/licenses/LICENSE-2.0";
+    private static final String CODE_LICENSE_URL = "http://www.apache.org/licenses/LICENSE-2.0";
+    private static final String ART_LICENSE_URL = "https://creativecommons.org/licenses/by/4.0/";
     private static final String PROJECT_URL = "https://github.com/agateau/cat-avatar-generator-app";
     private static final String CATGEN_URL = "http://www.peppercarrot.com/extras/html/2016_cat-generator/index.php";
     private static final String VERSION_NAME = "0.1.0";
@@ -46,7 +47,8 @@ public class AboutActivity extends AppCompatActivity {
         template.put("email", AUTHOR_EMAIL)
                 .put("gplay_url", GPLAY_URL)
                 .put("catgen_url", CATGEN_URL)
-                .put("license_url", LICENSE_URL)
+                .put("code_license_url", CODE_LICENSE_URL)
+                .put("art_license_url", ART_LICENSE_URL)
                 .put("project_url", PROJECT_URL);
 
         TextView view = (TextView) findViewById(R.id.descriptionTextView);

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cat Avatar Generator</string>
+    <string name="cat_name_hint">Nom du chat</string>
+    <string name="about_author">Aurélien Gâteau</string>
+    <string name="about_description">Cette application est basée sur le super <a href="{catgen_url}">générateur d\&apos;avatars de chats</a> de David Revoy.\n
+
+        \nDonnez à ces mignons chatons quelques étoiles sur <a href="{gplay_url}">Google Play</a> !\n
+
+        \n
+        Licence :\n
+        • Code : <a href="{code_license_url}">Apache 2.0</a>\n
+        • Chats : <a href="{art_license_url}">Creative Commons Attribution 4.0</a> par David Revoy\n
+
+        \nVous pouvez contribuer à ce projet sur <a href="{project_url}">GitHub</a>.
+    </string>
+</resources>

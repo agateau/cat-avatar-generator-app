@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Cat Avatar Generator</string>
     <string name="cat_name_hint">Cat name</string>
@@ -8,9 +9,9 @@
 
         \n
         License:\n
-        • Code: <a href="{license_url}">Apache 2.0</a>\n
-        • Artwork: CC-By David Revoy for <a href="{peppercarrot_url}">Pepper &amp; Carrot</a> comic\n
+        • Code: <a href="{code_license_url}">Apache 2.0</a>\n
+        • Cats: <a href="{art_license_url}">Creative Commons Attribution 4.0</a> by David Revoy\n
 
-        \nYou can fork the project on <a href="{project_url}">GitHub</a>.
+        \nYou can contribute to this project on <a href="{project_url}">GitHub</a>.
     </string>
 </resources>
