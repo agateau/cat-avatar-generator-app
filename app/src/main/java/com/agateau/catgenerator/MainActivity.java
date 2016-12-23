@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
-        startActivity(Intent.createChooser(shareIntent, "Share avatar with..."));
+        startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.share_via)));
     }
 
     private boolean saveAvatar(File avatarFile) {
