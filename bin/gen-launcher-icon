@@ -19,5 +19,6 @@ done <<EOF
  72 $RES_DIR/mipmap-hdpi
  96 $RES_DIR/mipmap-xhdpi
 144 $RES_DIR/mipmap-xxhdpi
+192 $RES_DIR/mipmap-xxxhdpi
 512 gplay
 EOF
