@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cat Avatar Generator</string>
+    <string name="cat_name_hint">Nama kucing</string>
+    <string name="about_author">Aurélien Gâteau</string>
+    <string name="about_description">Aplikasi ini berdasarkan pada aplikasi <a href="{catgen_url}">Cat avatar generator</a> yang luar biasa oleh David Revoy.\n
+
+        \nBeri kucing imut itu beberapa bintang di <a href="{gplay_url}">Google Play</a>!\n
+
+        \n
+        Lisensi:\n
+        • Kode: <a href="{code_license_url}">Apache 2.0</a>\n
+        • Kucing: <a href="{art_license_url}">Creative Commons Attribution 4.0</a> oleh David Revoy\n
+
+        \nAnda dapat berkontribusi pada proyek ini di <a href="{project_url}">GitHub</a>.
+    </string>
+    <string name="share_via">Bagikan melalui</string>
+</resources>
