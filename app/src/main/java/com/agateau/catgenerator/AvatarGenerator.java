@@ -63,7 +63,7 @@ public class AvatarGenerator extends AsyncTask<Long, Void, Bitmap> {
         Canvas canvas = new Canvas(bitmap);
 
         Matrix matrix = new Matrix();
-        float ratio = mSize / AVATAR_FULL_SIZE;
+        float ratio = mSize / (float)AVATAR_FULL_SIZE;
         matrix.setScale(ratio, ratio);
         canvas.setMatrix(matrix);
 
