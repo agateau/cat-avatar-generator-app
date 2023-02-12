@@ -30,7 +30,7 @@ public class AboutActivity extends AppCompatActivity {
     private static final String CODE_LICENSE_URL = "http://www.apache.org/licenses/LICENSE-2.0";
     private static final String ART_LICENSE_URL = "https://creativecommons.org/licenses/by/4.0/";
     private static final String PROJECT_URL = "https://github.com/agateau/cat-avatar-generator-app";
-    private static final String CATGEN_URL = "http://www.peppercarrot.com/extras/html/2016_cat-generator/index.php";
+    private static final String CATGEN_URL = "https://www.peppercarrot.com/extras/html/2016_cat-generator/index.php";
 
     public static void start(Context context) {
         Intent intent = new Intent(context, AboutActivity.class);
