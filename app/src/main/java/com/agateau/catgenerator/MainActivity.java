@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         if (mAvatarGenerator != null) {
             mAvatarGenerator.cancel(true);
         }
-        mAvatarGenerator = new AvatarGenerator(this, mAvatarPartDb, mImageView, size);
+        mAvatarGenerator = new AvatarGenerator(getAssets(), mAvatarPartDb, mImageView, size);
         mAvatarGenerator.execute(mSeed);
     }
 
