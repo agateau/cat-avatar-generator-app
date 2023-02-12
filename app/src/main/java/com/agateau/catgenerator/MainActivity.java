@@ -20,11 +20,8 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.core.content.FileProvider;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -37,14 +34,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+
 public class MainActivity extends AppCompatActivity {
+    private static final String PARTS_JSON = "parts/parts.json";
+
     private final AvatarPartDb mAvatarPartDb = new AvatarPartDb();
     private long mSeed = 0;
     private EditText mNameEditText;
     private ImageView mImageView;
     private AvatarGenerator mAvatarGenerator = null;
-
-    private final String PARTS_JSON = "parts/parts.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_main);
-        mImageView = (ImageView) findViewById(R.id.imageView);
+        mImageView = findViewById(R.id.imageView);
 
-        mNameEditText = (EditText) findViewById(R.id.nameEditText);
+        mNameEditText = findViewById(R.id.nameEditText);
         mNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -81,21 +81,11 @@ public class MainActivity extends AppCompatActivity {
 
         generateAvatar();
 
-        ImageButton button = (ImageButton) findViewById(R.id.shareButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                shareAvatar();
-            }
-        });
+        ImageButton button = findViewById(R.id.shareButton);
+        button.setOnClickListener(view -> shareAvatar());
 
-        button = (ImageButton) findViewById(R.id.infoButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showAbout();
-            }
-        });
+        button = findViewById(R.id.infoButton);
+        button.setOnClickListener(view -> showAbout());
     }
 
     private void generateAvatar() {
@@ -122,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
     private void shareAvatar() {
         File avatarDir = new File(getCacheDir(), "avatars");
         avatarDir.mkdirs();
-        File avatarFile = new File(avatarDir, String.valueOf(mSeed) + ".png");
+        File avatarFile = new File(avatarDir, mSeed + ".png");
 
         if (!saveAvatar(avatarFile)) {
             return;
@@ -143,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean saveAvatar(File avatarFile) {
         BitmapDrawable drawable = (BitmapDrawable) mImageView.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
-        FileOutputStream stream = null;
+        FileOutputStream stream;
         try {
             stream = new FileOutputStream(avatarFile);
         } catch (FileNotFoundException e) {

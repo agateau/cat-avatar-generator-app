@@ -37,14 +37,14 @@ import java.util.Random;
  * Generate a bitmap based on avatar parts
  */
 public class AvatarGenerator extends AsyncTask<Long, Void, Bitmap> {
+    private static final int AVATAR_FULL_SIZE = 1024;
+    private static final String AVATAR_PARTS_DIR = "parts";
+
     private final Context mContext;
     private final AvatarPartDb mAvatarPartDb;
     private final int mSize;
     private final WeakReference<ImageView> mImageViewReference;
     private final Random mRandom = new Random();
-
-    private final int AVATAR_FULL_SIZE = 1024;
-    private final String AVATAR_PARTS_DIR = "parts";
 
     public AvatarGenerator(Context context, AvatarPartDb avatarPartDb, ImageView imageView, int size) {
         mContext = context;

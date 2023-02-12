@@ -51,11 +51,11 @@ public class AboutActivity extends AppCompatActivity {
                 .put("art_license_url", ART_LICENSE_URL)
                 .put("project_url", PROJECT_URL);
 
-        TextView view = (TextView) findViewById(R.id.descriptionTextView);
+        TextView view = findViewById(R.id.descriptionTextView);
         view.setText(template.toSpanned());
         view.setMovementMethod(LinkMovementMethod.getInstance());
 
-        view = (TextView) findViewById(R.id.versionTextView);
+        view = findViewById(R.id.versionTextView);
         view.setText(VERSION_NAME);
     }
 }
