@@ -31,7 +31,6 @@ public class AboutActivity extends AppCompatActivity {
     private static final String ART_LICENSE_URL = "https://creativecommons.org/licenses/by/4.0/";
     private static final String PROJECT_URL = "https://github.com/agateau/cat-avatar-generator-app";
     private static final String CATGEN_URL = "http://www.peppercarrot.com/extras/html/2016_cat-generator/index.php";
-    private static final String VERSION_NAME = "0.2.0";
 
     public static void start(Context context) {
         Intent intent = new Intent(context, AboutActivity.class);
@@ -56,6 +55,6 @@ public class AboutActivity extends AppCompatActivity {
         view.setMovementMethod(LinkMovementMethod.getInstance());
 
         view = findViewById(R.id.versionTextView);
-        view.setText(VERSION_NAME);
+        view.setText(BuildConfig.VERSION_NAME);
     }
 }
