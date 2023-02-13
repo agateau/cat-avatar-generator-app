@@ -31,18 +31,22 @@
     git add .
     git commit -m "Preparing $VERSION"
 
-- [ ] Tag
-
-    git tag -a $newv -m "Release $VERSION"
-
 - [ ] Push
 
     git push
-    git push --tags
 
 # Publish beta
 
 - [ ] Upload to Google Play
+
+- [ ] Wait for Google Play to be API
+
+# Tag
+
+- [ ] Tag
+
+    git tag -a $VERSION -m "Release $VERSION"
+    git push --tags
 
 # Publish
 
