@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/usr/bin/env bash
+set -euo pipefail
 
 cd $(dirname $0)/..
 
@@ -6,19 +7,52 @@ RES_DIR=app/src/main/res
 
 SRC_FILE=icons/ic_launcher.png
 
-NAME=ic_launcher.png
+# Adaptative vars
+FG_NAME=ic_launcher_foreground.png
+ADAPTATIVE_PADDING_PERCENT="40"
+
+# Legacy vars
+LEGACY_NAME=ic_launcher.png
+LEGACY_PADDING_PERCENT="10"
+
+# Read the bg color to use as a background for the legacy icon from XML
+# (Yes, we parse XML using `grep`. Scary, I know)
+BG_COLOR_FILE=$RES_DIR/values/ic_launcher_background.xml
+BG_COLOR=$(grep ic_launcher_background $BG_COLOR_FILE | grep -o '#[0-9a-fA-F]*')
+
+echo "BG_COLOR: $BG_COLOR"
 
 while read size dir ; do
-    echo
-    echo "# $size => $dir"
-    echo
+    echo "$size => $dir"
     mkdir -p $dir
-    convert -resize "${size}x${size}" $SRC_FILE $dir/$NAME
+    inner_size=$((size * (100 - $ADAPTATIVE_PADDING_PERCENT) / 100))
+    convert -size "${size}x${size}" canvas:none \
+        -gravity center \
+        \( -resize "${inner_size}x${inner_size}" $SRC_FILE \) -composite \
+        $dir/$FG_NAME
+
+    # Legacy icon: uses an opaque background of $BG_COLOR
+    inner_size=$((size * (100 - $LEGACY_PADDING_PERCENT) / 100))
+    convert \
+        -size "${size}x${size}" canvas:$BG_COLOR \
+        -gravity center \
+        \( -resize "${inner_size}x${inner_size}" $SRC_FILE \) -composite \
+        $dir/$LEGACY_NAME
 done <<EOF
  48 $RES_DIR/mipmap-mdpi
  72 $RES_DIR/mipmap-hdpi
  96 $RES_DIR/mipmap-xhdpi
 144 $RES_DIR/mipmap-xxhdpi
 192 $RES_DIR/mipmap-xxxhdpi
-512 gplay
 EOF
+
+# Generate Google Play, following specs from:
+# https://developer.android.com/distribute/google-play/resources/icon-design-specifications
+echo "Google Play"
+size=512
+inner_size=384
+convert \
+    -size "${size}x${size}" canvas:$BG_COLOR \
+    -gravity center \
+    \( -resize "${inner_size}x${inner_size}" $SRC_FILE \) -composite \
+    gplay/ic_launcher.png

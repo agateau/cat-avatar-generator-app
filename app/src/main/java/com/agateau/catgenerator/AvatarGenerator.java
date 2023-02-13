@@ -16,6 +16,7 @@ limitations under the License.
 package com.agateau.catgenerator;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -37,17 +38,17 @@ import java.util.Random;
  * Generate a bitmap based on avatar parts
  */
 public class AvatarGenerator extends AsyncTask<Long, Void, Bitmap> {
-    private final Context mContext;
+    private static final int AVATAR_FULL_SIZE = 1024;
+    private static final String AVATAR_PARTS_DIR = "parts";
+
+    private final WeakReference<AssetManager> mAssetManagerRef;
     private final AvatarPartDb mAvatarPartDb;
     private final int mSize;
     private final WeakReference<ImageView> mImageViewReference;
     private final Random mRandom = new Random();
 
-    private final int AVATAR_FULL_SIZE = 1024;
-    private final String AVATAR_PARTS_DIR = "parts";
-
-    public AvatarGenerator(Context context, AvatarPartDb avatarPartDb, ImageView imageView, int size) {
-        mContext = context;
+    public AvatarGenerator(AssetManager assetManager, AvatarPartDb avatarPartDb, ImageView imageView, int size) {
+        mAssetManagerRef = new WeakReference<>(assetManager);
         mAvatarPartDb = avatarPartDb;
         mSize = size;
         mImageViewReference = new WeakReference<>(imageView);
@@ -58,12 +59,13 @@ public class AvatarGenerator extends AsyncTask<Long, Void, Bitmap> {
         long seed = params[0];
         mRandom.setSeed(seed);
         NLog.i("Starting seed=%d", seed);
+        AssetManager assetManager = mAssetManagerRef.get();
 
         Bitmap bitmap = Bitmap.createBitmap(mSize, mSize, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
 
         Matrix matrix = new Matrix();
-        float ratio = mSize / AVATAR_FULL_SIZE;
+        float ratio = mSize / (float)AVATAR_FULL_SIZE;
         matrix.setScale(ratio, ratio);
         canvas.setMatrix(matrix);
 
@@ -88,7 +90,7 @@ public class AvatarGenerator extends AsyncTask<Long, Void, Bitmap> {
             Bitmap partBitmap;
             try {
                 InputStream stream;
-                stream = mContext.getAssets().open(filePath);
+                stream = assetManager.open(filePath);
                 partBitmap = BitmapFactory.decodeStream(stream);
                 stream.close();
             } catch (IOException e) {

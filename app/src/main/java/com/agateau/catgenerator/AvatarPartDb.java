@@ -42,7 +42,7 @@ import java.util.Vector;
  *
  */
 public class AvatarPartDb {
-    private Map<String, Vector<AvatarPart>> mParts = new HashMap<>();
+    private final Map<String, Vector<AvatarPart>> mParts = new HashMap<>();
 
     public static final String[] PART_NAMES = {"body", "fur", "eyes", "mouth", "accessorie"};
 

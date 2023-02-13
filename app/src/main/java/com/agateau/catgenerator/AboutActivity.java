@@ -17,7 +17,7 @@ package com.agateau.catgenerator;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
@@ -30,8 +30,7 @@ public class AboutActivity extends AppCompatActivity {
     private static final String CODE_LICENSE_URL = "http://www.apache.org/licenses/LICENSE-2.0";
     private static final String ART_LICENSE_URL = "https://creativecommons.org/licenses/by/4.0/";
     private static final String PROJECT_URL = "https://github.com/agateau/cat-avatar-generator-app";
-    private static final String CATGEN_URL = "http://www.peppercarrot.com/extras/html/2016_cat-generator/index.php";
-    private static final String VERSION_NAME = "0.2.0";
+    private static final String CATGEN_URL = "https://www.peppercarrot.com/extras/html/2016_cat-generator/index.php";
 
     public static void start(Context context) {
         Intent intent = new Intent(context, AboutActivity.class);
@@ -51,11 +50,11 @@ public class AboutActivity extends AppCompatActivity {
                 .put("art_license_url", ART_LICENSE_URL)
                 .put("project_url", PROJECT_URL);
 
-        TextView view = (TextView) findViewById(R.id.descriptionTextView);
+        TextView view = findViewById(R.id.descriptionTextView);
         view.setText(template.toSpanned());
         view.setMovementMethod(LinkMovementMethod.getInstance());
 
-        view = (TextView) findViewById(R.id.versionTextView);
-        view.setText(VERSION_NAME);
+        view = findViewById(R.id.versionTextView);
+        view.setText(BuildConfig.VERSION_NAME);
     }
 }
