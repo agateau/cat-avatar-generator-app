@@ -10,8 +10,21 @@ android {
         versionCode 3
         versionName "0.2.1"
     }
+    signingConfigs {
+        release {
+            if (project.file('signing.gradle').exists()) {
+                apply from: 'signing.gradle', to: release
+            } else if (System.getenv("KEYSTORE_BASE64") != null) {
+                storeFile decodeKeyStoreFileFromBase64Env('KEYSTORE_BASE64')
+                storePassword System.getenv('KEYSTORE_PASSWORD')
+                keyAlias System.getenv('KEYSTORE_KEY_ALIAS')
+                keyPassword System.getenv('KEYSTORE_KEY_PASSWORD')
+            }
+        }
+    }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
