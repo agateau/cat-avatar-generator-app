@@ -9,7 +9,7 @@ SRC_FILE=icons/ic_launcher.png
 
 # Adaptative vars
 FG_NAME=ic_launcher_foreground.png
-ADAPTATIVE_PADDING_PERCENT="40"
+ADAPTATIVE_PADDING_PERCENT="20"
 
 # Legacy vars
 LEGACY_NAME=ic_launcher.png
@@ -27,7 +27,7 @@ while read size dir ; do
     mkdir -p $dir
     inner_size=$((size * (100 - $ADAPTATIVE_PADDING_PERCENT) / 100))
     convert -size "${size}x${size}" canvas:none \
-        -gravity center \
+        -gravity SouthWest \
         \( -resize "${inner_size}x${inner_size}" $SRC_FILE \) -composite \
         $dir/$FG_NAME
 
@@ -35,7 +35,7 @@ while read size dir ; do
     inner_size=$((size * (100 - $LEGACY_PADDING_PERCENT) / 100))
     convert \
         -size "${size}x${size}" canvas:$BG_COLOR \
-        -gravity center \
+        -gravity south \
         \( -resize "${inner_size}x${inner_size}" $SRC_FILE \) -composite \
         $dir/$LEGACY_NAME
 done <<EOF
@@ -50,9 +50,9 @@ EOF
 # https://developer.android.com/distribute/google-play/resources/icon-design-specifications
 echo "Google Play"
 size=512
-inner_size=384
+inner_size=410
 convert \
     -size "${size}x${size}" canvas:$BG_COLOR \
-    -gravity center \
+    -gravity south \
     \( -resize "${inner_size}x${inner_size}" $SRC_FILE \) -composite \
     gplay/ic_launcher.png
