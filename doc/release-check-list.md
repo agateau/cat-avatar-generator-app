@@ -39,7 +39,7 @@
 
 - [ ] Upload to Google Play
 
-- [ ] Wait for Google Play to be API
+- [ ] Wait for Google Play to be happy
 
 # Tag
 
